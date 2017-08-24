@@ -17,12 +17,7 @@ BOOL FD_PEB_NtGlobalFlags(){
 }
 void FD_PEB(){
 	int r;
-	printf("FD_PEB:\n");
-	r = IsDebuggerPresent();
-	if(r)
-		printf("\t[+]IsDebuggerPresent() \t= %08X\n",r);
-	else
-		printf("\t[-]IsDebuggerPresent() \t= %08X\n",r);
+	printf("FD_FLAGS:\n");
 	r = FD_PEB_BeingDebuggedFlag();
 	if(r)
 		printf("\t[+]BeingDebuggedFlag \t= %08X\n",r);

@@ -20,16 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AD_NTAPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="AD_OD_API.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="FD_API.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FD_INT.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FD_OD_Process.h">
@@ -38,19 +29,31 @@
     <ClInclude Include="FD_OD_Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FD_PEB.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="FP_CHECKSUM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FT_ICE.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FT_PUSHF.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FT_TIME.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="antidebug.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FD_TLS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FD_Except.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FD_FLAGS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AD_API.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FD_SetDebugPrivilege.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

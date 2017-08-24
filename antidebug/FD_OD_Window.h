@@ -7,7 +7,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd,LPARAM lParam)
 	{
 		GetWindowTextA(hwnd,ch,100);
 		strupr(ch);
-		printf("\t\tEnumWindow - %s\n",ch);
+		//printf("\t\tEnumWindow - %s\n",ch);
 		while(gOllyDbg[i][0]!=0){
 			strupr(gOllyDbg[i]);
 			if(strstr(ch,gOllyDbg[i])){
@@ -28,8 +28,8 @@ void FD_OD_Window(){
 		strupr(gOllyDbg[i]);
 		if(FindWindowA(gOllyDbg[i],0))
 			printf("\t[+]FindWindowA - %s\n",gOllyDbg[i]);
-		else
-			printf("\t[-]FindWindowA - %s\n",gOllyDbg[i]);
+		//else
+		//	printf("\t[-]FindWindowA - %s\n",gOllyDbg[i]);
 		i++;
 	}
 	EnumWindows(EnumWindowsProc,0);

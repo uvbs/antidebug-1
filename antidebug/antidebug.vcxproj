@@ -133,15 +133,16 @@
     <ClCompile Include="antidebug.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AD_NTAPI.h" />
-    <ClInclude Include="AD_OD_API.h" />
+    <ClInclude Include="AD_API.h" />
+    <ClInclude Include="antidebug.h" />
     <ClInclude Include="FD_API.h" />
-    <ClInclude Include="FD_INT.h" />
     <ClInclude Include="FD_OD_Process.h" />
     <ClInclude Include="FD_OD_Window.h" />
-    <ClInclude Include="FD_PEB.h" />
+    <ClInclude Include="FD_FLAGS.h" />
+    <ClInclude Include="FD_SetDebugPrivilege.h" />
+    <ClInclude Include="FD_TLS.h" />
     <ClInclude Include="FP_CHECKSUM.h" />
-    <ClInclude Include="FT_ICE.h" />
+    <ClInclude Include="FD_Except.h" />
     <ClInclude Include="FT_PUSHF.h" />
     <ClInclude Include="FT_TIME.h" />
   </ItemGroup>

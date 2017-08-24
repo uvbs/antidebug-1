@@ -16,7 +16,7 @@ BOOL FD_OD_Module_OD(PCHAR ExeFile,DWORD ProcessID){
 				strupr(m32w.szModule);
 				if(strstr(m32w.szModule,gOllyDbgDll[i])){
 					ret = TRUE;
-					printf("\t[+]EnumModule - %s:%s\n",ExeFile,m32w.szModule);
+					printf("\t[+]EnumModule - %s\t:%s\n",ExeFile,m32w.szModule);
 				}else{
 					//printf("\t\t\t[-]GetWindowTextA - %s:%s\n",gOllyDbg[i],ch);
 				}
@@ -41,22 +41,22 @@ BOOL FD_OD_Process_OD(){
 		//	printf("\t%04d:%s\n",pe32w.th32ProcessID,pe32w.szExeFile);
 			ret = FD_OD_Module_OD(pe32w.szExeFile,pe32w.th32ProcessID);
 			while(gOllyDbg[i][0]!=0){
-			strupr(gOllyDbgDll[i]);
-			strupr(pe32w.szExeFile);
-			if(strstr(pe32w.szExeFile,gOllyDbg[i])){
-				ret = TRUE;
-				printf("\t[+]EnumProcess - %s:%s\n",pe32w.szExeFile,gOllyDbg[i]);
-			}else{
-				//printf("\t\t\t[-]GetWindowTextA - %s:%s\n",gOllyDbg[i],ch);
+				strupr(gOllyDbg[i]);
+				strupr(pe32w.szExeFile);
+				if(strstr(pe32w.szExeFile,gOllyDbg[i])){
+					ret = TRUE;
+					printf("\t[+]EnumProcess - %s\t:%s\n",pe32w.szExeFile,gOllyDbg[i]);
+				}else{
+					//printf("\t\t\t[-]GetWindowTextA - %s:%s\n",gOllyDbg[i],ch);
+				}
+				i++;
 			}
-			i++;
-		}
 		}while(Process32Next(hProcessShot,&pe32w));
 	}
 	CloseHandle(hProcessShot);
 	return ret;
 }
 void FD_OD_Process(){
-	printf("FD_OD_Process:\n");
+	printf("FD_OD_PROCESS:\n");
 	FD_OD_Process_OD();
 }
