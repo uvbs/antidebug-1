@@ -1,0 +1,8 @@
+/.vs
+/Debug
+/Release
+/antidebug/Debug
+/antidebug/Release
+antidebug.sdf
+antidebug.opensdf
+
