@@ -3,8 +3,6 @@
 #include "stdio.h"
 #include "string.h"
 
-#define true	1
-#define false	0
 // OllyDbg Alias
 char gOllyDbg[][32] = {
 	"OllyDbg",

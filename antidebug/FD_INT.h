@@ -5,9 +5,9 @@ BOOL FD_INT_INT2D(){
 			nop
 		}
 	}__except(1){
-		return false;
+		return FALSE;
 	}
-	return true;
+	return TRUE;
 }
 void FD_INT(){
 	printf("FD_INT:\n");

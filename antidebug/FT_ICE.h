@@ -3,9 +3,9 @@ BOOL FT_ICE_Asm(){
 		__asm{
 			__emit 0xF1
 		}
-		return true;
+		return TRUE;
 	}__except(1){
-		return false;
+		return FALSE;
 	}
 }
 void FT_ICE(){

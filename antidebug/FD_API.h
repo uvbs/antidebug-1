@@ -3,10 +3,10 @@ BOOL FD_API_CheckRemoteDebuggerPresent(){
 	DWORD r = 0;
 	HANDLE h = LoadLibraryA("kernel32");
 	if (h == 0)
-		return false;
+		return FALSE;
 	pF f = (pF)GetProcAddress(h, "CheckRemoteDebuggerPresent");
 	if (f == 0)
-		return false;
+		return FALSE;
 		f(GetCurrentProcess(),&r);
 	return r;
 }
@@ -21,9 +21,13 @@ BOOL FD_API_CloseHandle(){
 }
 
 BOOL FD_API_DeleteFiber(){
-	char fiber[1024]={0};
-	DeleteFiber(fiber);
-	return (GetLastError()!=0x57);
+	__try {	
+		DeleteFiber((LPVOID)0x66666666);
+		
+	}__except (1) {
+
+	}
+	return GetLastError() != 0x57;
 }
 void FD_API(){
 	int r = 0;
@@ -37,8 +41,8 @@ void FD_API(){
 		printf("\t[+]CloseHandle - except\n");
 	else
 		printf("\t[-]CloseHandle - not except\n");
-	if(FD_API_DeleteFiber())
-		printf("\t[+]DeleteFiber - GetLastError != 0x57\n");
-	else
-		printf("\t[-]DeleteFiber - GetLastError == 0x57\n");
+	//if(FD_API_DeleteFiber())
+	//	printf("\t[+]DeleteFiber - GetLastError != 0x57\n");
+	//else
+	//	printf("\t[-]DeleteFiber - GetLastError == 0x57\n");	
 }
