@@ -47,13 +47,13 @@
     <ClInclude Include="FD_Except.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FD_FLAGS.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="AD_API.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FD_SetDebugPrivilege.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FD_PEB.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

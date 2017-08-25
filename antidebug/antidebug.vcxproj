@@ -138,7 +138,7 @@
     <ClInclude Include="FD_API.h" />
     <ClInclude Include="FD_OD_Process.h" />
     <ClInclude Include="FD_OD_Window.h" />
-    <ClInclude Include="FD_FLAGS.h" />
+    <ClInclude Include="FD_PEB.h" />
     <ClInclude Include="FD_SetDebugPrivilege.h" />
     <ClInclude Include="FD_TLS.h" />
     <ClInclude Include="FP_CHECKSUM.h" />
