@@ -27,19 +27,36 @@ void SendMessageOllyDbg() {
 		i++;
 	}
 }
+
+LONG WINAPI ExceptionFilter(PEXCEPTION_POINTERS pe) {
+	pe->ContextRecord->Eip += 4;
+	return EXCEPTION_CONTINUE_EXECUTION;
+}
+void SetUnHandledException() {
+	SetUnhandledExceptionFilter(ExceptionFilter);
+	__asm {
+		sub eax, eax
+		mov eax, [eax]
+		sub eax,eax
+	}
+}
 void AD_API(){
 	printf("AD_API:\n");
+
+	printf("\t[*]SetUnhandledExceptionFilter - press enter to continue!\n");
+	system("pause>nul");
+	SetUnHandledException();
+	printf("\t[*]SetUnhandledExceptionFilter\n");
 
 	printf("\t[*]OutputDebugStringA - press enter to continue!\n");
 	system("pause>nul");
 	OutputDebugStringA("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s");
 	printf("\t[*]OutputDebugStringA\n");
-
-
-
+	
 	printf("\t[*]SendMessage(WM_CLOSE) to OllyDbg,press enter to continue\n");
 	system("pause>nul");
 	SendMessageOllyDbg();
+
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger - press enter to continue!\n");
 	system("pause>nul");
 	ZwSetInformationThread_ThreadHideFromDebugger();
