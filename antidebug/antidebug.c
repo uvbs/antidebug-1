@@ -17,12 +17,12 @@
 */
 void main(){
 	BlockInput(FALSE);
+	FT_TIME_Start();
 	FD_SetDebugPrivilege();
-//	FD_Except();
+	FD_Except();
 	FD_OD_Process();
 	FT_PUSHF();
 	FP_CHECKSUM();
-	FT_TIME_Start();
 	FD_PEB();
 	FD_API();
 	FD_OD_Window();

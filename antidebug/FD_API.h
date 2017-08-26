@@ -64,4 +64,11 @@ void FD_API(){
 		printf("\t[+]ParentProcessName = %s\n", parentProcess);
 	else
 		printf("\t[-]ParentProcessName = %s\n", parentProcess);
+
+	STARTUPINFOA sinfo = { 0 };
+	GetStartupInfoA(&sinfo);
+	if (sinfo.dwX != 0 || sinfo.dwY != 0 || sinfo.dwXSize != 0 || sinfo.dwYSize != 0 || sinfo.dwXCountChars != 0 || sinfo.dwYCountChars != 0 || sinfo.dwFillAttribute != 0)
+		printf("\t[+]GetStartupInfo\n");
+	else
+		printf("\t[-]GetStartupInfo\n");
 }
