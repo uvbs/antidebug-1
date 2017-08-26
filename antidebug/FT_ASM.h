@@ -24,10 +24,28 @@ BOOL FT_PUSHF_Asm(){
 		r:
 	}
 }
+BOOL TflagExcept() {
+	__try {
+		__asm {
+			pushfd
+				or dword ptr[esp], 0x100
+				popfd
+				nop
+		}
+		return TRUE;
+	}
+	__except (1) {
+		return FALSE;
+	}
+}
 void FT_PUSHF(){
-	printf("FT_PUSHF:\n");
+	printf("FT_ASM:\n");
 	if(FT_PUSHF_Asm())
 		printf("\t[+]pushf trace\n");
 	else
 		printf("\t[-]pushf not trace\n");
+	if (TflagExcept())
+		printf("\t[+]Tflag \t- not except\n");
+	else
+		printf("\t[-]Tflag \t- except\n");
 }

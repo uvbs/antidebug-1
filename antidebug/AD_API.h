@@ -61,4 +61,6 @@ void AD_API(){
 	system("pause>nul");
 	ZwSetInformationThread_ThreadHideFromDebugger();
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger\n");
+
+
 }

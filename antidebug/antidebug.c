@@ -8,7 +8,7 @@
 #include "FT_TIME.h"
 #include "AD_API.h"
 #include "FP_CHECKSUM.h"
-#include "FT_PUSHF.h"
+#include "FT_ASM.h"
 #include "FD_OD_Process.h"
 #include "FD_SetDebugPrivilege.h"
 //main
@@ -19,7 +19,7 @@ void main(){
 	BlockInput(FALSE);
 	FT_TIME_Start();
 	FD_SetDebugPrivilege();
-	FD_Except();
+//	FD_Except();
 	FD_OD_Process();
 	FT_PUSHF();
 	FP_CHECKSUM();

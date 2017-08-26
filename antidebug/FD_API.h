@@ -17,6 +17,15 @@ BOOL IsExplorerProcessChild(PCHAR ParentProcess) {
 	else
 		return TRUE;
 }
+BOOL HardBreak() {
+	CONTEXT context = { 0 };
+	context.ContextFlags = CONTEXT_DEBUG_REGISTERS;
+	GetThreadContext(GetCurrentThread(), &context);
+	if (context.Dr0 != 0 || context.Dr1 != 0 || context.Dr2 != 0 || context.Dr3 != 0 || context.Dr6 != 0 || context.Dr7 != 0)
+		return TRUE;
+	else
+		return FALSE;
+}
 void FD_API(){
 	typedef DWORD(WINAPI* pF)(HANDLE,DWORD,PDWORD,DWORD,DWORD);
 	BOOL	r = 0;
@@ -71,4 +80,9 @@ void FD_API(){
 		printf("\t[+]GetStartupInfo\n");
 	else
 		printf("\t[-]GetStartupInfo\n");
+
+	if(HardBreak())
+		printf("\t[+]HardBreak\n");
+	else
+		printf("\t[-]HardBreak\n");
 }

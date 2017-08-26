@@ -32,9 +32,6 @@
     <ClInclude Include="FP_CHECKSUM.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FT_PUSHF.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="FT_TIME.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -54,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FD_PEB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FT_ASM.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

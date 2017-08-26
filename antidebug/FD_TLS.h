@@ -1,7 +1,7 @@
 void NTAPI _tls_callback1(PVOID DllHandle, DWORD dwReason, PVOID Reserved) {
 	if (dwReason != 1)
 		return;
-	BlockInput(TRUE);
+//	BlockInput(TRUE);
 	//MessageBoxA(0, "TLS Success!", "antidebug", 0);
 }
 
