@@ -18,7 +18,7 @@
 void main(){
 	BlockInput(FALSE);
 	FD_SetDebugPrivilege();
-	FD_Except();
+//	FD_Except();
 	FD_OD_Process();
 	FT_PUSHF();
 	FP_CHECKSUM();

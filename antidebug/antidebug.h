@@ -32,9 +32,36 @@ DWORD GetProcessIDByNameA(PCHAR ProcessName, PPROCESSENTRY32 PProEntry) {
 	}
 	if (Process32First(hProcessShot, &pe32)) {
 		do {
+			CHAR temp[MAX_PATH] = { 0 };
 			int i = 0;
 			//	printf("\t%04d:%s\n",pe32.th32ProcessID,pe32.szExeFile);
-			if (strcmp(pe32.szExeFile, ProcessName)==0) {
+			if (stricmp(pe32.szExeFile,ProcessName)==0) {
+				pid = pe32.th32ProcessID;
+				if (PProEntry != 0)
+					memcpy(PProEntry, &pe32, sizeof(pe32));
+				break;
+			}
+		} while (Process32Next(hProcessShot, &pe32));
+	}
+	CloseHandle(hProcessShot);
+	return pid;
+}
+
+DWORD GetProcessInfoByID(DWORD PID, PPROCESSENTRY32 PProEntry) {
+	DWORD pid = 0;
+	HANDLE hProcessShot = 0;
+	PROCESSENTRY32 pe32 = { 0 };
+	pe32.dwSize = sizeof(pe32);
+	hProcessShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	if (hProcessShot == INVALID_HANDLE_VALUE) {
+		return FALSE;
+	}
+	if (Process32First(hProcessShot, &pe32)) {
+		do {
+			CHAR temp[MAX_PATH] = { 0 };
+			int i = 0;
+			//	printf("\t%04d:%s\n",pe32.th32ProcessID,pe32.szExeFile);
+			if (pe32.th32ProcessID == PID) {
 				pid = pe32.th32ProcessID;
 				if (PProEntry != 0)
 					memcpy(PProEntry, &pe32, sizeof(pe32));

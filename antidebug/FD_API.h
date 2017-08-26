@@ -1,8 +1,29 @@
+BOOL IsExplorerProcessChild(PCHAR ParentProcess) {
+	PROCESSENTRY32 pe = { 0 };
+	CHAR	ExeFileName[MAX_PATH] = { 0 };
+	PCHAR	ExeNamePart = 0;
+	int		i = 0;
+	GetModuleFileNameA(GetModuleHandle(0), ExeFileName, MAX_PATH);
+	for (i = 0; ExeFileName[i] != 0;i++) {
+		if (ExeFileName[i] == '\\') {
+			ExeNamePart = &ExeFileName[i + 1];
+		}
+	}
+	GetProcessIDByNameA(ExeNamePart, &pe);
+	GetProcessInfoByID(pe.th32ParentProcessID, &pe);
+	strcpy(ParentProcess, pe.szExeFile);
+	if (stricmp(pe.szExeFile, "explorer.exe") == 0 || stricmp(pe.szExeFile, "cmd.exe") == 0)
+		return FALSE;
+	else
+		return TRUE;
+}
 void FD_API(){
 	typedef DWORD(WINAPI* pF)(HANDLE,DWORD,PDWORD,DWORD,DWORD);
 	BOOL	r = 0;
 	DWORD	Debug = 0;
 	pF		NtQueryInformationProcess	=	0;
+
+	CHAR	parentProcess[MAX_PATH] = { 0 };
 	printf("FD_API:\n");
 
 	r = IsDebuggerPresent();
@@ -38,4 +59,9 @@ void FD_API(){
 		printf("\t[+]NtQueryInformationProcess() - ProcessDebugFlags \t\t= %08X\n", Debug);
 	else
 		printf("\t[-]NtQueryInformationProcess() - ProcessDebugFlags \t\t= %08X\n", Debug);
+
+	if (IsExplorerProcessChild(parentProcess))
+		printf("\t[+]ParentProcessName = %s\n", parentProcess);
+	else
+		printf("\t[-]ParentProcessName = %s\n", parentProcess);
 }
