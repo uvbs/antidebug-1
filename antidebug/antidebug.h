@@ -81,35 +81,72 @@ DWORD __declspec(naked) KiFastSystemCallByIndex(DWORD index,...) {
 		__emit 0x34
 	}
 }
+
+DWORD __declspec(naked) KiIntSystemCallByIndex(DWORD index, ...) {
+	__asm {
+		mov eax, [esp + 4]
+		lea edx, [esp+8]
+		int 0x2e
+		retn
+	}
+}
+
 DWORD __declspec(naked) KiFastSystemCallByName(PCHAR name, ...) {
 	__asm {
 		push 0x6c
 		push 0x6c64746e
 		push esp
 		call GetModuleHandle
-		add esp,0x8
-		push [esp+4]
+		add esp, 0x8
+		push[esp + 4]
 		push eax
 		call GetProcAddress
-		mov eax,[eax+1]
-		mov edx,esp
+		mov eax, [eax + 1]
+		lea edx, [esp + 8]
+		int 0x2e
+		retn
+	}
+}
+DWORD __declspec(naked) KiIntSystemCallByName(PCHAR name, ...) {
+	__asm {
+		push 0x6c
+		push 0x6c64746e
+		push esp
+		call GetModuleHandle
+		add esp, 0x8
+		push[esp + 4]
+		push eax
+		call GetProcAddress
+		mov eax, [eax + 1]
+		mov edx, esp
 		//sysenter
 		__emit 0x0f
 		__emit 0x34
 	}
 }
+
+
 DWORD gCallDllFunEsp = 0;
 DWORD gCallDllFunRet = 0;
+DWORD gCallDllFunDll = 0;
+DWORD gCallDllFunFun = 0;
 DWORD __declspec(naked) CallDllFun(PCHAR dll,PCHAR proc,...) {
 	__asm {
-		mov [gCallDllFunEsp],esp
 		pop [gCallDllFunRet]
+		pop [gCallDllFunDll]
+		pop [gCallDllFunFun]
+		mov[gCallDllFunEsp], esp
+
+		sub esp,0x8
 		call LoadLibraryA
 		push eax
 		call GetProcAddress
+
 		call eax
+
 		mov esp,[gCallDllFunEsp]
-		add esp,0x04
+		push [gCallDllFunFun]
+		push [gCallDllFunDll]
 		push [gCallDllFunRet]
 		retn
 	}

@@ -15,7 +15,7 @@ void Int2eThreadHideFromDebugger() {
 		push 0
 		push 0x11
 		push -2
-		mov eax, 0xc7
+		mov eax, 0x0d
 		mov edx, esp
 		int 0x2e
 		mov eax, 0xe5
@@ -79,7 +79,8 @@ void AD_API(){
 
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger - press enter to continue!\n");
 	system("pause>nul");
-	ZwSetInformationThread_ThreadHideFromDebugger();
+	CallDllFun("ntdll", "ZwSetInformationThread", GetCurrentThread(), ThreadHideFromDebugger, 0, 0);
+//	ZwSetInformationThread_ThreadHideFromDebugger();
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger\n");
 
 	printf("\t[*]Int2eThreadHideFromDebugger - press enter to continue!\n");

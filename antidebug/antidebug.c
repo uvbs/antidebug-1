@@ -20,8 +20,11 @@ void main() {
 	if ((CHAR)GetVersion() == 5) {
 		KiFastSystemCallByIndex(0x9a, -1, 0x1f, &a, 4, 0);
 		KiFastSystemCallByName("ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
+		KiIntSystemCallByIndex(0x9a, -1, 0x1f, &a, 4, 0);
+		KiIntSystemCallByName("ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
 	}
 	CallDllFun("ntdll", "ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
+	//CallDllFun("user32", "MessageBoxA", 0, "ok", "pk", 0);
 	BlockInput(FALSE);
 	FT_TIME_Start();
 	FD_SetDebugPrivilege();
