@@ -9,7 +9,27 @@ void ZwSetInformationThread_ThreadHideFromDebugger(){
 		return;
 	f(GetCurrentThread(), ThreadHideFromDebugger,0,0);
 }
-
+void Int2eThreadHideFromDebugger() {
+	__asm {
+		push 0
+		push 0
+		push 0x11
+		push -2
+		mov eax, 0xc7
+		mov edx, esp
+		int 0x2e
+		mov eax, 0xe5
+		mov edx, esp
+		int 0x2e
+		mov eax, 0xee
+		mov edx, esp
+		int 0x2e
+		mov eax, 0x136
+		mov edx, esp
+		int 0x2e
+		add esp,0x10
+	}
+}
 void SendMessageOllyDbg() {
 	char ch[100];
 	int i = 0;
@@ -62,5 +82,8 @@ void AD_API(){
 	ZwSetInformationThread_ThreadHideFromDebugger();
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger\n");
 
-
+	printf("\t[*]Int2eThreadHideFromDebugger - press enter to continue!\n");
+	system("pause>nul");
+	Int2eThreadHideFromDebugger();
+	printf("\t[*]Int2eThreadHideFromDebugger\n");
 }

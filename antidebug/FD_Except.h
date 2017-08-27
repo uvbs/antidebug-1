@@ -19,6 +19,18 @@ BOOL int3() {
 		return FALSE;
 	}
 }
+BOOL int32() {
+	__try {
+		__asm {
+			__emit 0xCD
+			__emit 0x03
+		}
+		return TRUE;
+	}
+	__except (1) {
+		return FALSE;
+	}
+}
 BOOL int_2d() {
 	__try {
 		__asm {
@@ -64,6 +76,10 @@ void FD_Except() {
 		printf("\t[+]int3 \t not- except\n");
 	else
 		printf("\t[-]int3 \t- except\n");
+	if (int32())
+		printf("\t[+]int3_2 \t not- except\n");
+	else
+		printf("\t[-]int3_2 \t- except\n");
 	if (CloseHandleExcept())
 		printf("\t[+]CloseHandle \t- except\n");
 	else

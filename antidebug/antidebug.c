@@ -15,11 +15,17 @@
 /*
 ;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE
 */
-void main(){
+void main() {
+	DWORD a = 0;
+	if ((CHAR)GetVersion() == 5) {
+		KiFastSystemCallByIndex(0x9a, -1, 0x1f, &a, 4, 0);
+		KiFastSystemCallByName("ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
+	}
+	CallDllFun("ntdll", "ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
 	BlockInput(FALSE);
 	FT_TIME_Start();
 	FD_SetDebugPrivilege();
-//	FD_Except();
+	FD_Except();
 	FD_OD_Process();
 	FT_PUSHF();
 	FP_CHECKSUM();
