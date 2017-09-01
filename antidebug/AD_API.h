@@ -1,33 +1,22 @@
-void ZwSetInformationThread_ThreadHideFromDebugger(){
-	#define ThreadHideFromDebugger 17
-	typedef DWORD (__stdcall* pF)(HANDLE, DWORD, DWORD, DWORD);
-	HANDLE h = LoadLibraryA("ntdll");
-	if (h == 0)
-		return;
-	pF f = (pF)GetProcAddress(h, "ZwSetInformationThread");
-	if (f == 0)
-		return;
-	f(GetCurrentThread(), ThreadHideFromDebugger,0,0);
-}
 void Int2eThreadHideFromDebugger() {
 	__asm {
 		push 0
-		push 0
-		push 0x11
-		push -2
-		mov eax, 0x0d
-		mov edx, esp
-		int 0x2e
-		mov eax, 0xe5
-		mov edx, esp
-		int 0x2e
-		mov eax, 0xee
-		mov edx, esp
-		int 0x2e
-		mov eax, 0x136
-		mov edx, esp
-		int 0x2e
-		add esp,0x10
+			push 0
+			push 0x11
+			push - 2
+			mov eax, 0x0d
+			mov edx, esp
+			int 0x2e
+			mov eax, 0xe5
+			mov edx, esp
+			int 0x2e
+			mov eax, 0xee
+			mov edx, esp
+			int 0x2e
+			mov eax, 0x136
+			mov edx, esp
+			int 0x2e
+			add esp, 0x10
 	}
 }
 void SendMessageOllyDbg() {
@@ -56,12 +45,20 @@ void SetUnHandledException() {
 	SetUnhandledExceptionFilter(ExceptionFilter);
 	__asm {
 		sub eax, eax
-		mov eax, [eax]
-		sub eax,eax
+			mov eax, [eax]
+			sub eax, eax
 	}
 }
-void AD_API(){
+void AD_API() {
 	printf("AD_API:\n");
+	if ((CHAR)GetVersion() == 5){
+		printf("\t[*]Int2eThreadHideFromDebugger - press enter to continue!\n");
+		system("pause>nul");
+		Int2eThreadHideFromDebugger();
+		printf("\t[*]Int2eThreadHideFromDebugger\n");
+
+	}
+
 
 	printf("\t[*]SetUnhandledExceptionFilter - press enter to continue!\n");
 	system("pause>nul");
@@ -79,12 +76,6 @@ void AD_API(){
 
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger - press enter to continue!\n");
 	system("pause>nul");
-	CallDllFun("ntdll", "ZwSetInformationThread", GetCurrentThread(), ThreadHideFromDebugger, 0, 0);
-//	ZwSetInformationThread_ThreadHideFromDebugger();
+	CallDllFun("ntdll", "ZwSetInformationThread", GetCurrentThread(), 17, 0, 0);
 	printf("\t[*]ZwSetInformationThread - ThreadHideFromDebugger\n");
-
-	printf("\t[*]Int2eThreadHideFromDebugger - press enter to continue!\n");
-	system("pause>nul");
-	Int2eThreadHideFromDebugger();
-	printf("\t[*]Int2eThreadHideFromDebugger\n");
 }

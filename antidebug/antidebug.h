@@ -125,7 +125,6 @@ DWORD __declspec(naked) KiIntSystemCallByName(PCHAR name, ...) {
 	}
 }
 
-
 DWORD gCallDllFunEsp = 0;
 DWORD gCallDllFunRet = 0;
 DWORD gCallDllFunDll = 0;

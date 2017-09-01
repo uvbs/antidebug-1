@@ -16,7 +16,7 @@
 ;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE
 */
 void main() {
-	DWORD a = 0;
+	DWORD a = 0 ;
 	if ((CHAR)GetVersion() == 5) {
 		KiFastSystemCallByIndex(0x9a, -1, 0x1f, &a, 4, 0);
 		KiFastSystemCallByName("ZwQueryInformationProcess", -1, 0x1f, &a, 4, 0);
